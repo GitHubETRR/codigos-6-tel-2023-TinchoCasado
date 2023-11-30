@@ -5,19 +5,41 @@
 void T_Pasabajo(void);
 void T_Pasaalto(void);
 void F_Corte(void);
-void D_SK(void);
+//void D_SK(void);
 
 int main()
 {
-    printf("Bienvenido\n");
-    T_Pasabanda_Activo();
+    int i, end;
+    while(end!=1)
+    {
+        printf("Bienvenido\n¿Que desea calcular?\n");
+        printf("| 1 para pasabajo | 2 para pasaalto | 3 para frecuencia de corte |\n");
+        printf("Ingrese el número deseado: ");
+        scanf("%d", &i);
+        switch(i)
+        {
+            case 1:
+                T_Pasabajo();
+                break;
+            case 2:
+                T_Pasaalto();
+                break;
+            case 3:
+                F_Corte();
+                break;
+        }
+        printf("\n| Ingrese 1 para finalizar | Cualquier otro número para seguir calculando |\n");
+        printf("Ingrese si desea continuar o no: ");
+        scanf("%d", &end);
+    }
+    printf("Gracias por haber utilizado esta humilde calculadora\nSaludos");
     return 0;
 }
 
 void T_Pasabajo(void)
 {
     float r, f_low, f_high, step, t, cap, u;
-    int i;
+    int f;
     char unidad;
     printf("Ingrese un valor de resistencia (en ohms): ");
     scanf("%f", &r);
@@ -40,17 +62,17 @@ void T_Pasabajo(void)
     scanf("%f", &f_high);
     printf("Ingrese de a cuanto son los pasos: ");
     scanf("%f", &step);
-    for(i=f_low;i<=f_high;i=i+step)
+    for(f=f_low;f<=f_high;f=f+step)
     {
-        t = 1/(2*PI*i*r*cap +1);
-        printf("\nt = %f | f = %i", t, i);
+        t = 1/(2*PI*f*r*cap +1);
+        printf("\nt = %f | f = %i", t, f);
     }
 }
 
 void T_Pasaalto(void)
 {
     float r, f_low, f_high, step, t, cap, u;
-    int i;
+    int f;
     char unidad;
     printf("Ingrese un valor de resistencia (en ohms): ");
     scanf("%f", &r);
@@ -73,10 +95,10 @@ void T_Pasaalto(void)
     scanf("%f", &f_high);
     printf("Ingrese de a cuanto son los pasos: ");
     scanf("%f", &step);
-    for(i=f_low;i<=f_high;i=i+step)
+    for(f=f_low;f<=f_high;f=f+step)
     {
-        t = (2*PI*i*r*cap)/(2*PI*i*r*cap +1);
-        printf("\nt = %f | f = %i", t, i);
+        t = (2*PI*f*r*cap)/(2*PI*f*r*cap +1);
+        printf("\nt = %f | f = %i", t, f);
     }
 }
 
@@ -127,7 +149,7 @@ void F_Corte(void)
     printf("La frecuencia de corte [Hz] es de: %0.2f\n", f);
 }
 
-void D_SK(void)
+/*void D_SK(void)  //Cálculo para filtro Sallen Key, a terminar
 {   
     float r, fr, rb, step, t, cap, u;
     int i, q;
@@ -148,4 +170,4 @@ void D_SK(void)
     scanf("%f", &fr);
     printf("Ingrese la frecuencia de corte: ");
     scanf("%f", &fr);
-}
+}*/
